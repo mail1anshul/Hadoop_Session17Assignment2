@@ -1,0 +1,58 @@
+val filedata = sc.textFile("/home/acadgild/Desktop/assignments/session17/assignment2/17.2_Dataset.txt")
+
+val arraydata = filedata.map(line => line.split(",")).map(array => (array(0), array(1), array(2), array(3), array(4)))
+
+=======
+
+arraydata.count()
+
+======
+
+val Data1 = arraydata.map(x => x._2)
+Data1.collect
+val subjects = Data1.distinct
+subjects.collect
+subjects.count()
+
+======
+
+val Data2 = arraydata.map(x => (x._1=="Mathew" && x._4=="55"))
+Data2.collect
+val Result = Data2.filter(_ == true)
+Result.collect
+Result.count()
+
+=======
+
+val Data3 = arraydata.map(x => x._3)
+Data3.collect
+val Result = Data3.countByValue
+
+=======
+
+val Data4 = arraydata.map(x => ((x._1),(x._4.toInt)))
+Data4.collect
+val Data5 = Data4.mapValues(x => (x,1)).reduceByKey((x,y) => (x._1 + y._1, x._2 + y._2))
+Data5.collect
+val Result = Data5.map{case(key, value) => (key, value._1/value._2.toFloat)}
+Result.collect
+=========
+
+val Data6 = arraydata.map(x => ((x._2),(x._4.toInt)))
+Data6.collect
+val Data7 = Data6.mapValues(x => (x,1)).reduceByKey((x,y) => (x._1 + y._1, x._2 + y._2))
+Data7.collect
+val Result = Data7.map{case(key, value) => (key, value._1/value._2.toFloat)}
+Result.collect
+
+=======
+
+val Data8 = arraydata.map(x => ((x._3),(x._4.toInt))).mapValues(x => (x,1)).reduceByKey((x,y) => (x._1 + y._1, x._2 + y._2))
+Data8.collect
+val Data9 = Data8.map{case(key, value) => (key, value._1/value._2.toFloat)}
+Data9.collect
+val Result = Data10.map(x => (x._2>50)).filter(_ == true)
+Result.count
+
+==========
+
